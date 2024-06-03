@@ -30,71 +30,93 @@
           font-family: 'Poly', serif;
         }
       }
+
+      .menu-enter-active {
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+      }
+      .menu-enter-start {
+        transform: scaleY(0);
+        opacity: 0;
+      }
+      .menu-enter-end {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+      .fade-enter-active {
+        transition: opacity 0.5s ease-in-out;
+      }
+      .fade-enter-start {
+        opacity: 0;
+      }
+      .fade-enter-end {
+        opacity: 1;
+      }
     </style>
     <title>Elegant Interiors | Where Beauty and Comfort Seamlessly Come Together</title>
   </head>
-  <body class="bg-black text-white">
+  <body class="bg-black text-white text-sm md:text-base">
     <div id="app" class="bg-[url('public/bg.png')] min-h-screen bg-cover bg-center flex flex-col" x-data="{ menuOpen: false }">
-      <header class="px-8 md:px-16 pt-8">
-        <nav class="grid grid-cols-12 h-32">
-          <div id="logo" class="col-span-4 flex flex-col justify-center">
-            <div class="w-16 md:w-20">
-              <a href="/" class="w-full h-auto">
-                <img src="/logo.png" class="w-full object-fit" alt="logo" />
-              </a>
-            </div>
-          </div>
-          <div class="col-span-8 md:relative w-full">
-            <div class="block md:hidden w-10 absolute right-8 top-12 cursor-pointer z-30" @click="menuOpen = !menuOpen">
-              <svg xmlns="http://www.w3.org/2000/svg" :fill="menuOpen ? 'black' : 'white'" viewBox="0 0 24 24" stroke-width="1.5" :stroke="menuOpen ? 'black' : 'white'" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-              </svg>
-            </div>
-
-            <div :class="{'block': menuOpen, 'hidden': !menuOpen}" class="md:flex flex-col md:flex-row items-center justify-between w-full h-full absolute top-0 right-0 z-10 md:static bg-white md:bg-transparent">
-              <ul class="flex flex-col md:flex-row justify-evenly items-center space-y-8 md:space-y-0 md:space-x-12 h-full">
-                <li class="w-full md:w-auto h-full flex flex-col items-center justify-center text-[#FFE8D3] text-2xl">
-                  <a href="#">Home</a>
-                </li>
-                <li class="w-full md:w-auto h-full flex flex-col items-center justify-center text-2xl text-black md:text-inherit">
-                  <a href="#">About Us</a>
-                </li>
-                <li class="w-full md:w-auto h-full flex flex-col items-center justify-center text-2xl text-black md:text-inherit">
-                  <a href="#">Services</a>
-                </li>
-                <li class="w-full md:w-auto h-full flex flex-col items-center justify-center text-2xl text-black md:text-inherit">
-                  <a href="#">Offers</a>
-                </li>
-              </ul>
-              <div class="flex flex-col items-center justify-center mb-4 md:mb-0">
-                <button type="button" class="w-48 p-4 bg-[#8E623A] rounded-full flex flex-row text-xl items-center justify-center text-white space-x-4">
-                  <img class="w-6" src="/phone-icon.png" alt="" />
-                  <div>Contact</div>
-                </button>
+      <header class="px-8 md:px-16 pt-0 md:pt-8 mb-16 md:mb-0">
+          <nav class="grid grid-cols-12 h-28 md:h-32">
+              <div id="logo" class="col-span-4 relative flex flex-col justify-center">
+                  <div class="w-16 md:w-28 relative z-20">
+                      <a href="/" class="w-full h-auto">
+                          <img src="/logo.png" class="w-full object-fit" alt="logo" />
+                      </a>
+                  </div>
               </div>
-            </div>
-          </div>
-        </nav>
+              <div class="col-span-8 md:relative w-full">
+                  <div class="block md:hidden w-10 absolute right-8 top-12 cursor-pointer z-30" @click="menuOpen = !menuOpen">
+                      <svg xmlns="http://www.w3.org/2000/svg" :fill="menuOpen ? 'black' : 'white'" viewBox="0 0 24 24" stroke-width="1.5" :stroke="menuOpen ? 'black' : 'white'" class="size-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+                      </svg>
+                  </div>
+  
+                  <div :class="{ 'menu-enter-active': menuOpen, 'menu-enter-start': !menuOpen, 'hidden': !menuOpen }" class="menu-enter-end md:flex flex-col md:flex-row items-center justify-between w-full h-full absolute top-0 right-0 z-10 md:static bg-white md:bg-transparent transform origin-top scale-y-0">
+                      <ul :class="{ 'fade-enter-active': menuOpen, 'fade-enter-start': !menuOpen }" class="fade-enter-end mt-12 md:mt-0 flex flex-col md:flex-row justify-evenly items-center md:space-y-0 md:space-x-12 h-full">
+                          <li x-transition :class="{ 'text-[#8e623a]': menuOpen, 'text-[#FFE8D3]': !menuOpen }" class="w-full md:w-auto md:h-full flex flex-col items-center justify-center text-2xl">
+                              <a href="#">Home</a>
+                          </li>
+                          <li :class="{ 'hover:text-[#8e623a]': menuOpen, 'hover:text-[#FFE8D3]': !menuOpen }" class="hover:text-[#FFE8D3] w-full md:w-auto md:h-full flex flex-col items-center justify-center text-2xl text-black md:text-inherit">
+                              <a href="#">About Us</a>
+                          </li>
+                          <li :class="{ 'hover:text-[#8e623a]': menuOpen, 'hover:text-[#FFE8D3]': !menuOpen }" class="hover:text-[#FFE8D3] w-full md:w-auto md:h-full flex flex-col items-center justify-center text-2xl text-black md:text-inherit">
+                              <a href="#">Services</a>
+                          </li>
+                          <li :class="{ 'hover:text-[#8e623a]': menuOpen, 'hover:text-[#FFE8D3]': !menuOpen }" class="hover:text-[#FFE8D3] w-full md:w-auto md:h-full flex flex-col items-center justify-center text-2xl text-black md:text-inherit">
+                              <a href="#">Offers</a>
+                          </li>
+                      </ul>
+                      <div class="flex flex-col items-center justify-center md:absolute md:right-8 md:top-12 mb-4 md:mb-0">
+                          <button type="button" class="w-48 p-4 bg-[#8E623A] rounded-full flex flex-row text-xl items-center justify-center text-white space-x-4">
+                              <img class="w-6" src="/phone-icon.png" alt="" />
+                              <div>Contact</div>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </nav>
       </header>
       <main class="w-full h-5/6 flex-1 flex items-center justify-center px-8">
-        <header id="hero" class="text-center relative bottom-16">
-          <h1 class="text-6xl md:text-8xl mb-4 text-[#FFE8D3] leading-[75px] md:leading-[108px]">Design your homes by<br>Elegant Interiors</h1>
-          <p class="text-lg md:text-2xl leading-9">Where Beauty and Comfort Seamlessly Come Together to Enhance Your <br class="hidden md:block">Everyday Living Experience</p>
-          <div class="mt-6">
-            <div class="bg-white flex flex-row justify-between items-center p-4 rounded-md">
-              <div class="w-full flex flex-row space-x-4">
-                <div class="w-5">
-                  <img src="/search-icon.png" class="w-full object-cover" alt="" />
+          <header id="hero" class="text-center relative bottom-16">
+              <h1 class="text-6xl md:text-8xl mb-4 text-[#FFE8D3] leading-[75px] md:leading-[108px]">Design your homes by<br>Elegant Interiors</h1>
+                <p class="text-base md:text-2xl leading-9">Where Beauty and Comfort Seamlessly Come Together to Enhance Your <br class="hidden md:block">Everyday Living Experience</p>
+                <div class="mt-6">
+                    <div class="bg-white w-5/6 mx-auto flex flex-row justify-between items-center p-4 rounded-md">
+                        <div class="w-full flex flex-row space-x-4">
+                            <div class="w-5">
+                                <img src="/search-icon.png" class="w-full object-cover" alt="" />
+                            </div>
+                            <input class="w-full placeholder:text-[#3C3C43] placeholder:opacity-60" type="email" placeholder="Enter your email..." />
+                        </div>
+                        <button class="bg-[url('/cancel.png')] bg-cover w-4 h-4">
+                        </button>
+                    </div>
                 </div>
-                <input class="w-full placeholder:text-[#3C3C43] placeholder:opacity-60" type="email" placeholder="Enter your email..." />
-              </div>
-              <button class="bg-[url('/cancel.png')] bg-cover w-4 h-4">
-              </button>
-            </div>
-          </div>
-        </header>
-      </main>
+            </header>
+        </main>
     </div>
     <script type="module" src="/main.js"></script>
-  </body>
-</html>
+    </body>
+    </html>
+      
